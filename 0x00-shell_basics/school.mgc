@@ -1,2 +1,4 @@
+touch school.mgc
+cat > school.mgc 
 0 string SCHOOL School data
-!:mime School  
+!:mime School
