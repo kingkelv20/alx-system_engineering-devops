@@ -1,3 +1,4 @@
+![0-simple_web_stack](https://github.com/kingkelv20/alx-system_engineering-devops/assets/117770810/0b3dd919-8386-4011-8f91-f3adf3ea6352)
 
 Description:
 
