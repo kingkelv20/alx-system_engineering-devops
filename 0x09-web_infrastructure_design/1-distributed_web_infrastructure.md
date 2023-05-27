@@ -1,3 +1,5 @@
+https://ibb.co/7V9rmRy
+
 To design a three-server web infrastructure that hosts the website www.foobar.com, we will incorporate the following components:
 
 Load Balancer (HAProxy):
