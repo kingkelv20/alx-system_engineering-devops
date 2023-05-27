@@ -1,4 +1,5 @@
-![Uploading 1-distributed_web_infrastructure.jpg…]()
+![1-distributed_web_infrastructure](https://github.com/kingkelv20/alx-system_engineering-devops/assets/117770810/9666a50b-5b89-4986-b7ff-c0b0ad1b9fcf)
+
 
 To design a three-server web infrastructure that hosts the website www.foobar.com, we will incorporate the following components:
 
