@@ -1,4 +1,7 @@
-Infrastructure Setup:
+![3-scale_up](https://github.com/kingkelv20/alx-system_engineering-devops/assets/117770810/450d9d8f-2924-4cfa-bca7-fe696a494fd6)
+
+
+## Infrastructure Setup:
 
 1. Server: The main purpose of the server is to host and manage the entire infrastructure. It acts as the central point for managing and coordinating the various components.
 
@@ -10,21 +13,21 @@ Infrastructure Setup:
 
 5. Database Server: The database server stores and manages data required by the application. It handles read and write operations and ensures data integrity and security. The application server interacts with the database server to retrieve or update data as needed.
 
-Explanation:
+## Explanation:
 
-Load Balancer (HAproxy):
+### Load Balancer (HAproxy):
 The load balancer is added to distribute incoming traffic across multiple servers. By distributing the load, it prevents any single server from becoming overwhelmed and ensures high availability. If one server fails or becomes overloaded, the load balancer redirects traffic to other healthy servers. This setup improves performance, scalability, and reliability.
 
-Web Server:
+### Web Server:
 The web server is added to efficiently handle and serve static content. It specializes in processing HTTP requests and delivering web pages to clients. By separating static content handling from dynamic content processing, the web server can focus on its primary task, resulting in faster response times and improved performance.
 
-Application Server:
+### Application Server:
 The application server is included to handle the processing of dynamic content and execute complex business logic. It provides an environment to run server-side applications, interact with databases, and perform application-specific tasks. By separating the application logic from the web server, it allows for scalability, easier maintenance, and better resource allocation.
 
-Database Server:
+### Database Server:
 The database server is essential for storing and managing application data. It ensures data integrity, handles concurrent read and write operations, and provides secure access to the data. By dedicating a separate server for the database, it improves performance and allows for efficient data management.
 
-Splitting the components into separate servers:
+## Splitting the components into separate servers:
 Separating the components into different servers offers several advantages:
 
 1. Scalability: Each component can be scaled independently based on its specific requirements. For example, if the web server receives more traffic, additional web servers can be added to handle the load without impacting the application server or database server.
