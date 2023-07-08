@@ -1,30 +1,53 @@
 #!/usr/bin/env bash
-# script to report information about server domains
-# shellcheck disable=SC2086
-check_domain() {
-	# awk will use record seperator of space
-	# space sperated list of sub domains
-	SUBDOMAINS='www lb-01 web-01 web-02'
+# Function to display information about a specific subdomain
 
-	if [ -z "$1" ]; then
-		exit
-	fi
-	# no sub domain specified, do all
-	if [ -z "$2" ]; then
-		echo "$SUBDOMAINS" | awk -v domain="$1"\
-		'BEGIN { RS=" " }
-		{split($0,ARR," ");
-		cmd = "dig " ARR[1]"."domain " | grep -A1 \"ANSWER SECTION:\" | tail -n1";
-		system(cmd)
-		close(cmd)}' | awk\
-		'{
-		split($0, DOMS, ".");
-		print "The subdomain " DOMS[1] " is a " $4 " record and points to " $5}'
-	else
-		dig "$2.$1" | grep -A1 "ANSWER SECTION:" | tail -n1 | awk\
-		'{
-		split($0, DOMS, ".");
-		print "The subdomain " DOMS[1] " is a " $4 " record and points to " $5}'
-	fi
+# function audit_subdomain {
+#     subdomain=$1
+#     domain=$2
+#     host=$(dig +short $subdomain.$domain)
+#     if [ -n "$host" ]; then
+#         record_type=$(dig $subdomain.$domain | awk '/ANSWER SECTION/{print $4}')
+#         echo "The subdomain $subdomain is a $record_type record and points to $host"
+#     else
+#         echo "The subdomain $subdomain does not exist"
+#     fi
+# }
+
+# # Check for command-line arguments
+# if [ $# -eq 0 ]; then
+#     echo "Usage: $0 domain [subdomain]"
+#     exit 1
+# elif [ $# -eq 1 ]; then
+#     domain=$1
+#     subdomains=(www lb-01 web-01 web-02)
+# else
+#     domain=$1
+#     subdomains=($2)
+# fi
+
+# # Iterate over subdomains and display information
+# for subdomain in "${subdomains[@]}"; do
+#     audit_subdomain $subdomain $domain
+# done
+
+
+subdomains_all=( "www" "lb-01" "web-01" "web-02" )
+
+runDig () {
+    subdomain=$1
+    domain=$2
+
+    dig "$subdomain.$domain" | grep -A1 'ANSWER SECTION:' | tail -1 | awk -v s="$subdomain" 'BEGIN { FS = " " } ; { print "The subdomain " s " is a " $4 " record and points to " $5 }'
 }
-check_domain "$1" "$2"
+
+if [ $# -eq 1 ]; then
+    domain="$1"
+    for i in "${subdomains_all[@]}"
+    do
+	runDig "$i" "$domain"
+    done
+elif [ $# -eq 2 ]; then
+    domain="$1"
+    subdomain="$2"
+    runDig "$subdomain" "$domain"
+fi
